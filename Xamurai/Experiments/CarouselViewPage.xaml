@@ -11,6 +11,8 @@
 			              HorizontalOptions="Center"
 			              ItemsSource="{Binding Cars}"
 			              VerticalOptions="CenterAndExpand">
+				
+			
 				<CarouselView.ItemsLayout>
 					<LinearItemsLayout Orientation="Horizontal"
 					                   SnapPointsAlignment="Center"
@@ -18,7 +20,7 @@
 				</CarouselView.ItemsLayout>
 				<CarouselView.ItemTemplate>
 					<DataTemplate>
-						<local:CarView WidthRequest="300" />
+						<local:CarView/>
 					</DataTemplate>
 				</CarouselView.ItemTemplate>
 			</CarouselView>

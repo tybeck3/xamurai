@@ -2,13 +2,42 @@
 <ContentPage
 	x:Class="Xamurai.PagedCollectionPage"
 	xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:Xamurai">
 	<ContentPage.Content>
-		<StackLayout>
-			<Label
-				HorizontalOptions="CenterAndExpand"
-				Text="CHALLENGE #1: Paged Collection View"
-				VerticalOptions="CenterAndExpand" />
-		</StackLayout>
+		<Grid>
+			<ScrollView x:Name="scrollView"
+						Orientation="Horizontal"
+						Scrolled="OnScrollViewScrolled">
+						<!--ADDED SCROLLED LISTENER TO TRY AND ADD LOGIC TO CS FILE
+							REALIZED I NEEDED A WAY TO SEPARATE LEFT AND RIGHT...-->
+				<ScrollView.GestureRecognizers>
+					<SwipeGestureRecognizer Direction="Left,Right" Swiped="OnSwiped"/>
+				</ScrollView.GestureRecognizers>
+						<!--...SO I TRIED HERE, AND COULDN'T FIGURE OUT THE LOGIC
+						ON HOW TO MAKE THE PAGE MOVE A SPECIFIC DISTANCE,
+						PLUS I COULDN'T FIGURE OUT ANY KIND OF SNAPPING ABILITY LIKE IN CAROUSEL VIEW -->
+				<FlexLayout
+					AlignContent="Start"
+					AlignItems="Center"
+					BindableLayout.ItemsSource="{Binding Cars}"
+					Direction="Column"
+					JustifyContent="Start"
+					Wrap="Wrap">
+					<BindableLayout.ItemTemplate>
+						<DataTemplate>
+							<local:CarView>
+								<local:CarView.WidthRequest>
+									<OnIdiom
+										x:TypeArguments="x:Double"
+										Phone="200"
+										Tablet="400" />
+								</local:CarView.WidthRequest>
+							</local:CarView>
+						</DataTemplate>
+					</BindableLayout.ItemTemplate>
+				</FlexLayout>
+			</ScrollView>
+		</Grid>
 	</ContentPage.Content>
 </ContentPage>
